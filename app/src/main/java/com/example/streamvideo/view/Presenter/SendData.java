@@ -16,8 +16,8 @@ public static void sendData(Context context, byte[] data, int w, int h, int f){
     bb.putInt(h);
     bb.putInt(f);
     bb.put(data);
-    MqttConnection.getInstance(context);
-    MqttConnection.getInstance(context).publish(bb.array());
-//    ReciveData.reciveData(bb.array());
+//    MqttConnection.getInstance(context);
+//    MqttConnection.getInstance(context).publish(bb.array());
+    ReciveData.reciveData(bb.array());
 }
 }

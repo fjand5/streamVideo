@@ -22,12 +22,15 @@ import android.view.SurfaceView;
 import android.widget.ImageView;
 
 import com.example.streamvideo.R;
+import com.example.streamvideo.view.Model.CameraServer;
 import com.example.streamvideo.view.Presenter.ReciveData;
 import com.example.streamvideo.view.Presenter.SendData;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+
+import okhttp3.mockwebserver.MockWebServer;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,6 +44,9 @@ public static Context mContext;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mContext =this;
+
+        CameraServer.getInstance(this);
+
         camera = Camera.open(1);
         camera.startPreview();
         Camera.Parameters parameters = camera.getParameters();
@@ -69,6 +75,7 @@ public static Context mContext;
                 options.outWidth = w;
                 Bitmap bitmap = BitmapFactory.decodeByteArray(buf.toByteArray(),
                         0,buf.toByteArray().length,options);
+                CameraServer.getInstance(mContext).setBuffer(bitmap.);
                 remotePreviewImv.setImageBitmap(bitmap);
 
             }
